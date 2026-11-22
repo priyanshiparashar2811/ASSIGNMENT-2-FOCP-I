@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int main(void) {
+    int n, symmetric = 1;
+    long long matrix[MAX_SIZE][MAX_SIZE];
+
+    if (scanf("%d", &n) != 1 || n < 1 || n > MAX_SIZE) return 0;
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            if (scanf("%lld", &matrix[i][j]) != 1) return 0;
+
+    for (int i = 0; i < n && symmetric; i++)
+        for (int j = i + 1; j < n; j++)
+            if (matrix[i][j] != matrix[j][i]) {
+                symmetric = 0;
+                break;
+            }
+
+    printf("%s\n", symmetric ? "YES" : "NO");
+    return 0;
+}
