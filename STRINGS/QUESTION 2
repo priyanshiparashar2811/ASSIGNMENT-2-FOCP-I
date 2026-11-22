@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_LENGTH 10000
+
+int main(void) {
+    char input[MAX_LENGTH];
+    if (scanf("%9999s", input) != 1) return 0;
+
+    int length = (int)strlen(input);
+    for (int i = 0; i < length; ) {
+        int count = 1;
+        while (i + count < length && input[i + count] == input[i])
+            count++;
+
+        printf("%c%d", input[i], count);
+        i += count;
+    }
+
+    printf("\n");
+    return 0;
+}
