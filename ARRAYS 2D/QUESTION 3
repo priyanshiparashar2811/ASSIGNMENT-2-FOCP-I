@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+int main(void) {
+    int rows, cols;
+    long long matrix[MAX_SIZE][MAX_SIZE];
+
+    if (scanf("%d %d", &rows, &cols) != 2 ||
+        rows < 1 || rows > MAX_SIZE || cols < 1 || cols > MAX_SIZE) return 0;
+
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            if (scanf("%lld", &matrix[i][j]) != 1) return 0;
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            int minimumInRow = 1, maximumInColumn = 1;
+
+            for (int k = 0; k < cols; k++)
+                if (matrix[i][k] < matrix[i][j]) minimumInRow = 0;
+
+            for (int k = 0; k < rows; k++)
+                if (matrix[k][j] > matrix[i][j]) maximumInColumn = 0;
+
+            if (minimumInRow && maximumInColumn) {
+                printf("%d %d %lld\n", i, j, matrix[i][j]);
+                return 0;
+            }
+        }
+    }
+
+    printf("None\n");
+    return 0;
+}
