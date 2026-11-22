@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define MAX_N 10000
+
+int main(void) {
+    int n;
+    long long values[MAX_N], minimum = LLONG_MAX;
+    if (scanf("%d", &n) != 1 || n < 2 || n > MAX_N) return 0;
+
+    for (int i = 0; i < n; i++)
+        if (scanf("%lld", &values[i]) != 1) return 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            long long difference = values[i] - values[j];
+            if (difference < 0) difference = -difference;
+            if (difference < minimum) minimum = difference;
+        }
+    }
+
+    printf("%lld\n", minimum);
+    return 0;
+}
